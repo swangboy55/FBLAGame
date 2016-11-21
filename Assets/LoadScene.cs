@@ -1,23 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
+    public string scene;
 
-	// Use this for initialization
-	void Start ()
+    public void Start()
     {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
+        Button b = GetComponent<Button>();
 
-    public void SceneLoad(string scene)
+        b.onClick.AddListener(delegate () { Load(scene); });
+    }
+    public void Load(string scene)
     {
         SceneManager.LoadScene(scene);
     }
