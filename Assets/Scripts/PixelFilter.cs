@@ -5,7 +5,7 @@ public class PixelFilter : MonoBehaviour
 {
 
     //how chunky to make the screen
-    public int pixelSize = 4;
+    public float pixelSize = 4;
     public FilterMode filterMode = FilterMode.Point;
     public Camera[] otherCameras;
     private Material mat;
@@ -13,9 +13,9 @@ public class PixelFilter : MonoBehaviour
 
     void Start()
     {
-        (GetComponent<Camera>()).pixelRect = new Rect(0, 0, Screen.width / pixelSize, Screen.height / pixelSize);
+        (GetComponent<Camera>()).pixelRect = new Rect(0, 0, (int)(Screen.width / pixelSize), (int)(Screen.height / pixelSize));
         for (int i = 0; i < otherCameras.Length; i++)
-            otherCameras[i].pixelRect = new Rect(0, 0, Screen.width / pixelSize, Screen.height / pixelSize);
+            otherCameras[i].pixelRect = new Rect(0, 0, (int)(Screen.width / pixelSize), (int)(Screen.height / pixelSize));
     }
 
     void OnGUI()
