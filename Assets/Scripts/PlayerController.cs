@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour {
     public float JumpImpulse;
     public float VelocityInvertTime = 0.5f;
     private float collisionTime;
-    private Vector2 collisionNormal;
-    private Vector2 hitVelocity;
-    private bool colliding = false;
+    private List<Vector2> collisionNormal = new List<Vector2>();
+    private List<Vector2> hitVelocity = new List<Vector2>();
+    private bool colliding { get { return collisionNormal.Count > 0; } }
     private bool spaceHeld = false;
 
     private float gravSave;
@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour {
         vAxis = (Input.GetKey(KeyCode.S) ? -1 : (Input.GetKey(KeyCode.Space) ? 1 : 0));
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         Vector2 newVelocity;
+        if(jumpDown)
+        {
+            int a = 0;
+        }
         if (!colliding)
         {
             newVelocity = rigid.velocity + new Vector2(hAxis * Acceleration * Time.fixedDeltaTime,
@@ -67,11 +71,11 @@ public class PlayerController : MonoBehaviour {
                 rigid.gravityScale = gravSave;
                 if (collisionTime + VelocityInvertTime < Time.time)
                 {
-                    newVelocity += (collisionNormal.normalized * JumpImpulse);
+                    newVelocity += (collisionNormal[0].normalized * JumpImpulse);
                 }
                 else
                 {
-                    newVelocity += (Vector2.Dot(new Vector2(-hitVelocity.x, 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulse);
+                    newVelocity += (Vector2.Dot(new Vector2(-hitVelocity[0].x, 0), collisionNormal[0]) * collisionNormal[0]) + new Vector2(0, JumpImpulse);
                     //Debug.Log(newVelocity);
                 }
             }
@@ -91,9 +95,8 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        colliding = true;
-        collisionNormal = col.contacts[0].normal;
-        hitVelocity = col.relativeVelocity;
+        collisionNormal.Add(col.contacts[0].normal);
+        hitVelocity.Add(col.relativeVelocity);
         collisionTime = Time.time;
     }
 
@@ -101,10 +104,14 @@ public class PlayerController : MonoBehaviour {
     {
         foreach(ContactPoint2D contact in col.contacts)
         {
-            if(contact.normal.x == collisionNormal.x && contact.normal.y == collisionNormal.y)
+            for (int a = 0; a < collisionNormal.Count; a++)
             {
-                colliding = false;
-                break;
+                if (contact.normal.x == collisionNormal[a].x && contact.normal.y == collisionNormal[a].y)
+                {
+                    collisionNormal.RemoveAt(a);
+                    hitVelocity.RemoveAt(a);
+                    break;
+                }
             }
         }
     }
