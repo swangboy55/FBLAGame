@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MenuInputHandler : MonoBehaviour
 {
-    public Button ButtonOne, ButtonTwo;
+    public Button ButtonOne, ButtonTwo, ButtonThree;
     public Canvas canvas;
     public GameObject selectorPrefab;
     private GameObject selector;
@@ -16,17 +16,18 @@ public class MenuInputHandler : MonoBehaviour
     {
         ButtonOne.enabled = false;
         ButtonTwo.enabled = false;
-        buttons = new Button[] { ButtonOne, ButtonTwo };
+        ButtonThree.enabled = false;
+        buttons = new Button[] { ButtonOne, ButtonTwo, ButtonThree };
         selector = Instantiate(selectorPrefab) as GameObject;
         selector.transform.SetParent(canvas.transform);
         selector.transform.localScale = new Vector3(1, 1, 1);
-        selector.transform.localPosition = new Vector3(ButtonOne.transform.localPosition.x - 200, ButtonOne.transform.localPosition.y,
+        selector.transform.localPosition = new Vector3(ButtonOne.transform.localPosition.x - 400, ButtonOne.transform.localPosition.y,
             0);
     }
 
     void OnGUI()
     {
-        if(ButtonOne == null || ButtonTwo == null)
+        if(ButtonOne == null || ButtonTwo == null || ButtonThree == null)
         {
             return;
         }
@@ -36,11 +37,11 @@ public class MenuInputHandler : MonoBehaviour
             if (!keyState)
             {
                 buttonIndex++;
-                if (buttonIndex >= 2)
+                if (buttonIndex >= 3)
                 {
                     buttonIndex = 0;
                 }
-                selector.transform.localPosition = new Vector3(buttons[buttonIndex].transform.localPosition.x - 200, buttons[buttonIndex].transform.localPosition.y,
+                selector.transform.localPosition = new Vector3(buttons[buttonIndex].transform.localPosition.x - 400, buttons[buttonIndex].transform.localPosition.y,
                     0);
             }
             keyState = true;
@@ -52,9 +53,9 @@ public class MenuInputHandler : MonoBehaviour
                 buttonIndex--;
                 if (buttonIndex < 0)
                 {
-                    buttonIndex = 1;
+                    buttonIndex = 2;
                 }
-                selector.transform.localPosition = new Vector3(buttons[buttonIndex].transform.localPosition.x - 200, buttons[buttonIndex].transform.localPosition.y,
+                selector.transform.localPosition = new Vector3(buttons[buttonIndex].transform.localPosition.x - 400, buttons[buttonIndex].transform.localPosition.y,
                     0);
             }
             keyState = true;
