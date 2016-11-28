@@ -3,22 +3,23 @@ using System.Collections;
 
 public class BallColorChanger : MonoBehaviour
 {
-
-    public float HueIncrement;
+    public float VelocityUpperBound;
     private float currentHue;
 
 	// Use this for initialization
 	void Start () {
-        currentHue = 0;
+        currentHue = 0.8f;
 	}
-	
-    void OnCollisionEnter2D(Collision2D collision)
+
+    void Update()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.HSVToRGB(currentHue, 1, 1);
-        currentHue += HueIncrement;
+        currentHue = (GetComponent<Rigidbody2D>().velocity.magnitude / VelocityUpperBound);
         if (currentHue > 1)
         {
-            currentHue -= (int)currentHue;
+            currentHue = 1;
         }
+        currentHue *= 0.8f;
+        currentHue = 0.8f - currentHue;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.HSVToRGB(currentHue, 1, 1);
     }
 }
