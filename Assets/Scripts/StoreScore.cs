@@ -37,7 +37,7 @@ public class StoreScore : MonoBehaviour
             string[] Filllines = new string[20];
             for (int i = 0; i < Filllines.Length; i++)
             {
-                Filllines[i] = " : ";
+                Filllines[i] = " : 0";
             }
             Filllines[0] = entry;
             System.IO.File.WriteAllLines("scoreboard.txt", Filllines);
