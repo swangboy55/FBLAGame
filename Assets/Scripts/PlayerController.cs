@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public float Acceleration;
     public float MaxSpeed;
     public float JumpImpulse;
+    public float JumpImpulseWJ;
     public float VelocityInvertTime = 0.5f;
     private float collisionTime;
     private Vector2 collisionNormal;
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour {
         vAxis = (Input.GetKey(KeyCode.S) ? -1 : (Input.GetKey(KeyCode.Space) ? 1 : 0));
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         Vector2 newVelocity;
-        Collider2D[] coll = Physics2D.OverlapCircleAll(rigid.position, GetComponent<CircleCollider2D>().radius * 1.5f, 1 << LayerMask.NameToLayer("Default"));
+        Collider2D[] coll = Physics2D.OverlapCircleAll(rigid.position, GetComponent<CircleCollider2D>().radius * 2f, 1 << LayerMask.NameToLayer("Default"));
 
         UpdateCollisionData(coll, rigid);
 
@@ -135,7 +136,20 @@ public class PlayerController : MonoBehaviour {
                 }
                 else
                 {
-                    newVelocity += (Vector2.Dot(new Vector2(-hitVelocity.x, 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulse);
+                    //scalingfactor represents a factor to scale inhereted x velocity by
+                    float scalingfactor = 0.3f;
+                    float minWallLaunch = 10.0f;
+
+                    float moveSign = Mathf.Sign(-hitVelocity.x);
+
+                    if (Mathf.Sign(hAxis) == /*moveSign*/Mathf.Sign(collisionNormal.x) || collisionNormal.x == 0)
+                    {
+                        newVelocity += (Vector2.Dot(new Vector2(-hitVelocity.x, 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulse);
+                    }
+                    else
+                    {
+                        newVelocity += (Vector2.Dot(new Vector2(moveSign * Mathf.Max(Mathf.Abs(-hitVelocity.x * scalingfactor), minWallLaunch), 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulseWJ);
+                    }
                     //Debug.Log((Vector2.Dot(new Vector2(hitVelocity.x, 0), collisionNormal) * collisionNormal));
                 }
             }
