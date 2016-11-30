@@ -120,8 +120,8 @@ public class PlayerController : MonoBehaviour {
 
         if (!colliding)
         {
-            newVelocity = rigid.velocity + new Vector2(hAxis * Acceleration * Time.fixedDeltaTime,
-                vAxis * rigid.gravityScale * (-Physics2D.gravity.y / 2.0f) * Time.fixedDeltaTime);
+            newVelocity = rigid.velocity + new Vector2(hAxis * Acceleration * Time.deltaTime,
+                vAxis * rigid.gravityScale * (-Physics2D.gravity.y / 2.0f) * Time.deltaTime);
         }
         else
         {
