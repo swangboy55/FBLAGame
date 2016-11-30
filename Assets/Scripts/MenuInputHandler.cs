@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+//Script to handle input on the main menu.
 public class MenuInputHandler : MonoBehaviour
 {
     public Button ButtonOne, ButtonTwo, ButtonThree;
@@ -12,6 +13,9 @@ public class MenuInputHandler : MonoBehaviour
     private int buttonIndex = 0;
     private bool keyState = false;
 
+    /// <summary>
+    /// Make an array with all menu buttons passed in, and then move the selector to the first button
+    /// </summary>
     void Start()
     {
         ButtonOne.enabled = false;
@@ -25,6 +29,10 @@ public class MenuInputHandler : MonoBehaviour
             0);
     }
 
+    /// <summary>
+    /// Move the selector if user input is given to the different buttons, and invoke an onClick event if enter is pressed
+    /// on a given button.
+    /// </summary>
     void OnGUI()
     {
         if(ButtonOne == null || ButtonTwo == null || ButtonThree == null)

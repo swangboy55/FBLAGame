@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
+
+// Script to handle user input on the failure screen. Very similar to the MenuInputHandler, but has slight
+// differences in terms of how it works and how many buttons it supports.
 public class FailInputHandler : MonoBehaviour
 {
     public Button ButtonOne, ButtonTwo;
@@ -11,7 +14,9 @@ public class FailInputHandler : MonoBehaviour
     private Button[] buttons;
     private int buttonIndex = 0;
     private bool keyState = false;
-
+    /// <summary>
+    /// Make an array with all menu buttons passed in, and then move the selector to the first button
+    /// </summary>
     void Start()
     {
         ButtonOne.enabled = false;
@@ -24,6 +29,10 @@ public class FailInputHandler : MonoBehaviour
             0);
     }
 
+    /// <summary>
+    /// Move the selector if user input is given to the different buttons, and invoke an onClick event if enter is pressed
+    /// on a given button.
+    /// </summary>
     void OnGUI()
     {
         if(ButtonOne == null || ButtonTwo == null)

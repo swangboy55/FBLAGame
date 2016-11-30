@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//Script to have the camera track the player ingame, delays camera movement to make it smoother/more challening.
 public class TrackBall : MonoBehaviour {
 
     public GameObject referenceObject;
@@ -14,8 +15,7 @@ public class TrackBall : MonoBehaviour {
         velocity = new Vector3(0, 0, 0);    
     }
 
-    // Update is called once per frame
-    //track the character object(referenceObject) with the camera, and smoothdamp movement so it flows nicely.
+
     /// <summary>
     ///  Update is called once per frame
     ///  track the character object(referenceObject) with the camera, and smoothdamp movement so it flows nicely.

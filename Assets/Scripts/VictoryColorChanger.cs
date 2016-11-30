@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//script to cycle through hues for the color of a text object
 public class VictoryColorChanger : MonoBehaviour
 {
     private float currentHue;
@@ -11,8 +12,6 @@ public class VictoryColorChanger : MonoBehaviour
         currentHue = 0;
 	}
 
-    //on every update, incriment hue ever so slightly and change the text color component of the text object this script
-    //is attatched to.
     /// <summary>
     /// on every update, incriment hue ever so slightly and change the text color component of the text object this script
     /// is attatched to.

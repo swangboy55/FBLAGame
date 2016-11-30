@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StoreScore : MonoBehaviour {
+//Script to permenently store player scores for the leaderboard.
+public class StoreScore : MonoBehaviour
+{
 
     //number of entries in the scoreboard. I'd rather keep it at 20. 
     public int numScores = 20;
     // Use this for initialization    
-    void Start ()
+    void Start()
     {
-	//unused
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        //unused
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-	//unused
-	}
+        //unused
+    }
 
     /// <summary>
     /// stores a score permenently in memory, located in game folder as txt

@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// The class to handle the movement of the player. This class is complicated, as getting the player movement down is arguably the 
+/// most important thing when it comes to making this game. It is based almost entirely on how the player moves afterall.
+/// </summary>
 public class PlayerController : MonoBehaviour {
 
     public float Acceleration;
@@ -136,12 +140,13 @@ public class PlayerController : MonoBehaviour {
                 }
                 else
                 {
-                    //scalingfactor represents a factor to scale inhereted x velocity by
+                    //scalingfactor represents a factor to scale inhereted x velocity by, but only in the case that the intended direction of the player is opposite to the vector that is created on the collision.
                     float scalingfactor = 0.3f;
                     float minWallLaunch = 10.0f;
 
                     float moveSign = Mathf.Sign(-hitVelocity.x);
-
+                    
+                    //If statement checks if the player is intending to wall-jump into the wall, or jump away from it. Vectors for each are significantly different.
                     if (Mathf.Sign(hAxis) == /*moveSign*/Mathf.Sign(collisionNormal.x) || collisionNormal.x == 0)
                     {
                         newVelocity += (Vector2.Dot(new Vector2(-hitVelocity.x, 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulse);
