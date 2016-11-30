@@ -18,6 +18,7 @@ public class PixelFilter : MonoBehaviour
             otherCameras[i].pixelRect = new Rect(0, 0, (int)(Screen.width / pixelSize), (int)(Screen.height / pixelSize));
     }
 
+    //
     void OnGUI()
     {
         if (Event.current.type == EventType.Repaint)

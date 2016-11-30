@@ -7,14 +7,20 @@ public class TrackBall : MonoBehaviour {
     public float DampingFactor = 0;
     private Vector3 velocity;
 
-    // Use this for initialization
+    // Use this for initialization.
+    //initial velocity of the moving camera to zero
     void Start()
     {
-        velocity = new Vector3(0, 0, 0);
-        //destination = new Vector3(referenceObject.transform.position.x, referenceObject.transform.position.y, -10);
+        velocity = new Vector3(0, 0, 0);    
     }
 
     // Update is called once per frame
+    //track the character object(referenceObject) with the camera, and smoothdamp movement so it flows nicely.
+    /// <summary>
+    ///  Update is called once per frame
+    ///  track the character object(referenceObject) with the camera, and smoothdamp movement so it flows nicely.
+    /// </summary>
+
     void FixedUpdate()
     {
         if (referenceObject != null)
