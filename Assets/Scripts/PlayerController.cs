@@ -154,15 +154,11 @@ public class PlayerController : MonoBehaviour {
                         {
                             newVelocity += new Vector2(0, JumpImpulse);
                         }
-                        Debug.Log(Vector2.Dot(new Vector2(-hitVelocity.x, 0), collisionNormal));
                     }
                     else
                     {
                         newVelocity += (Vector2.Dot(new Vector2(moveSign * Mathf.Max(Mathf.Abs(-hitVelocity.x * scalingfactor), minWallLaunch), 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulseWJ);
-
-                        Debug.Log("ZZZZZZZOOO");
                     }
-                    //Debug.Log((Vector2.Dot(new Vector2(hitVelocity.x, 0), collisionNormal) * collisionNormal));
                 }
             }
         }
