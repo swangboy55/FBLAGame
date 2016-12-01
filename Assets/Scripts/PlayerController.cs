@@ -149,11 +149,18 @@ public class PlayerController : MonoBehaviour {
                     //If statement checks if the player is intending to wall-jump into the wall, or jump away from it. Vectors for each are significantly different.
                     if (Mathf.Sign(hAxis) == /*moveSign*/Mathf.Sign(collisionNormal.x) || collisionNormal.x == 0)
                     {
-                        newVelocity += (Vector2.Dot(new Vector2(-hitVelocity.x, 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulse);
+                        newVelocity += (Mathf.Abs(hitVelocity.x * collisionNormal.x) + Mathf.Abs(hitVelocity.y * (1 - collisionNormal.y))) * collisionNormal;
+                        if(Mathf.Abs(collisionNormal.y) <= 0.0001f || collisionNormal.y >= 0)
+                        {
+                            newVelocity += new Vector2(0, JumpImpulse);
+                        }
+                        Debug.Log(Vector2.Dot(new Vector2(-hitVelocity.x, 0), collisionNormal));
                     }
                     else
                     {
                         newVelocity += (Vector2.Dot(new Vector2(moveSign * Mathf.Max(Mathf.Abs(-hitVelocity.x * scalingfactor), minWallLaunch), 0), collisionNormal) * collisionNormal) + new Vector2(0, JumpImpulseWJ);
+
+                        Debug.Log("ZZZZZZZOOO");
                     }
                     //Debug.Log((Vector2.Dot(new Vector2(hitVelocity.x, 0), collisionNormal) * collisionNormal));
                 }
