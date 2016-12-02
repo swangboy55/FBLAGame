@@ -61,7 +61,7 @@ public class FailInputHandler : MonoBehaviour
                 buttonIndex--;
                 if (buttonIndex < 0)
                 {
-                    buttonIndex = 2;
+                    buttonIndex = 1;
                 }
                 selector.transform.localPosition = new Vector3(buttons[buttonIndex].transform.localPosition.x - 400, buttons[buttonIndex].transform.localPosition.y,
                     0);
