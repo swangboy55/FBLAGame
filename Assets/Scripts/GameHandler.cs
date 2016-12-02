@@ -12,11 +12,13 @@ public class GameHandler : MonoBehaviour
     public GameObject speedReq;
     public GameObject playerVel;
     public GameObject secondsTillDead;
+    public GameObject failPrompt;
     public string nextScene;
-
+    
     public float SpeedInterval;
     public float SpeedIntervalRate = 1.0f;
 
+    private string currentScene;
     private float velocityUpperBound;
     private float score;
     private float timeStart;
@@ -25,6 +27,7 @@ public class GameHandler : MonoBehaviour
     private float deltaTimeSum = 0;
     private int combo;
 
+    private static int lives = 3; 
     private float velCurHue;
     private float reqCurHue;
 
@@ -41,6 +44,7 @@ public class GameHandler : MonoBehaviour
         velocityUpperBound = GetComponent<BallColorChanger>().VelocityUpperBound;
         velCurHue = 0.8f;
         reqCurHue = 0.8f;
+        currentScene = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
@@ -49,7 +53,14 @@ public class GameHandler : MonoBehaviour
         Debug.Log(GetComponent<Rigidbody2D>().velocity.magnitude + " , " + velocityNeeded + " , " + timeUnderReq);
         if (Time.time < timeStart + PreparationSeconds)
         {
-
+            if(Time.time < timeStart + PreparationSeconds / 3)
+            {
+                failPrompt.GetComponent<UnityEngine.UI.Text>().enabled = true;
+            }
+            else
+            {
+                failPrompt.GetComponent<UnityEngine.UI.Text>().enabled = false;
+            }
         }
         else
         {
@@ -74,7 +85,17 @@ public class GameHandler : MonoBehaviour
 
             if (timeUnderReq >= timeAllowedUnderReq)
             {
-                SceneManager.LoadScene("Fail");
+                if(lives > 0)
+                {
+                    SceneManager.LoadScene(currentScene);
+                    lives--;
+                }
+                else
+                {
+                    SceneManager.LoadScene("fail");
+                    lives = 3;
+                }
+                
             }
 
         }
@@ -110,6 +131,9 @@ public class GameHandler : MonoBehaviour
         }
 
         secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)(timeUnderReq * 100.0f)) / 100.0f).ToString() + " / " + timeAllowedUnderReq;
+
+        failPrompt.GetComponent<UnityEngine.UI.Text>().text = "Lives : " + lives;
+
 
 
 
