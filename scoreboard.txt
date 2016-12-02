@@ -1,4 +1,4 @@
-geno : 5
+meme : one hunnit
 geno : 5
 geno : 5
 geno : 5
