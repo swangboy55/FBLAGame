@@ -40,12 +40,13 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-
             RaycastHit2D[][] hits2D = new RaycastHit2D[colliders.Length][];
             int inc = 0;
             int size = 0;
+            PlatformScript script = null;
             foreach (Collider2D collider in colliders)
             {
+                script = collider.gameObject.GetComponent<PlatformScript>();
                 hits2D[inc] = Physics2D.LinecastAll(rigid.position, collider.transform.position, 1 << LayerMask.NameToLayer("Default"));
                 size += hits2D[inc].Length;
                 inc++;
@@ -74,6 +75,10 @@ public class PlayerController : MonoBehaviour {
                     }
                 }
                 collisionNormal = nearestVerticalNormal;
+                if(script != null)
+                {
+                    script.OnPlayerCollide(gameObject, collisionNormal, rigid.velocity);
+                }
                 //hitVelocity = rigid.velocity;
             }
             else
@@ -91,6 +96,11 @@ public class PlayerController : MonoBehaviour {
                     collisionNormal = nearestVerticalNormal;
                     //hitVelocity = rigid.velocity;
                     collisionTime = Time.time;
+
+                    if (script != null)
+                    {
+                        script.OnPlayerCollide(gameObject, collisionNormal, rigid.velocity);
+                    }
                 }
             }
         }

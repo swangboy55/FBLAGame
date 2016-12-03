@@ -34,7 +34,6 @@ public class GameHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(GetComponent<Rigidbody2D>().velocity.magnitude + " , " + velocityNeeded + " , " + timeUnderReq );
         if (Time.time < timeStart + PreparationSeconds)
         {
 
