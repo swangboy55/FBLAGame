@@ -7,7 +7,8 @@ public class BoostScript : PlatformScript {
 
     public override void OnPlayerCollide(GameObject player, Vector2 hitNormal, Vector2 hitVelocity)
     {
-        if(!shouldApplyEffect(hitNormal))
+
+        if (!shouldApplyEffect(hitNormal))
         {
             return;
         }
