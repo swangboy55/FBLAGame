@@ -13,9 +13,11 @@ public class PlayerController : MonoBehaviour {
     public float JumpImpulse;
     public float JumpImpulseWJ;
     public float VelocityInvertTime = 0.5f;
+    private float jumpTime = -55;
     private float collisionTime;
     private Vector2 collisionNormal;
     private Vector2 hitVelocity;
+    private Vector2 velocityPrevTick;
     private bool colliding;
     private bool spaceHeld = false;
 
@@ -23,7 +25,6 @@ public class PlayerController : MonoBehaviour {
 
     //necessary input data
     private bool jumpDown = false;
-    private bool spacePressed = false;
     private float vAxis = 0;
     private float hAxis = 0;
 
@@ -79,7 +80,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     script.OnPlayerCollide(gameObject, collisionNormal, rigid.velocity);
                 }
-                //hitVelocity = rigid.velocity;
+                hitVelocity = velocityPrevTick;
             }
             else
             {
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour {
                 if(collisionNormal.y != nearestVerticalNormal.y || collisionNormal.x != nearestVerticalNormal.x)
                 {
                     collisionNormal = nearestVerticalNormal;
-                    //hitVelocity = rigid.velocity;
+                    hitVelocity = velocityPrevTick;
                     collisionTime = Time.time;
 
                     if (script != null)
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour {
         Collider2D[] coll = Physics2D.OverlapCircleAll(rigid.position, GetComponent<CircleCollider2D>().radius * 2f, 1 << LayerMask.NameToLayer("Default"));
 
         UpdateCollisionData(coll, rigid);
-
+        
         if (!colliding)
         {
             newVelocity = rigid.velocity + new Vector2(hAxis * Acceleration * Time.deltaTime,
@@ -140,10 +141,16 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            if(collisionTime + VelocityInvertTime < Time.time)
+            {
+                GetComponent<GameHandler>().UpdateCombo(true);
+            }
             newVelocity = rigid.velocity + new Vector2(hAxis * Acceleration * Time.fixedDeltaTime, 0);
             if (jumpDown)
             {
                 rigid.gravityScale = gravSave;
+                GetComponent<GameHandler>().UpdateCombo(false);
+                jumpTime = Time.time;
                 if (collisionTime + VelocityInvertTime < Time.time)
                 {
                     newVelocity += (collisionNormal.normalized * JumpImpulse);
@@ -172,13 +179,15 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
+        velocityPrevTick = newVelocity;
         GetComponent<Rigidbody2D>().velocity = newVelocity;
+        GetComponent<GameHandler>().UpdateComboPretty(Time.time - jumpTime, VelocityInvertTime);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        hitVelocity = col.relativeVelocity;
-    }
+    //void OnCollisionEnter2D(Collision2D col)
+    //{
+    //    hitVelocity = col.relativeVelocity;
+    //}
 
     //void OnCollisionExit2D(Collision2D col)
     //{

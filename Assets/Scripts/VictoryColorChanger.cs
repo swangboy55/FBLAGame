@@ -13,7 +13,7 @@ public class VictoryColorChanger : MonoBehaviour
 	}
 
     /// <summary>
-    /// on every update, incriment hue ever so slightly and change the text color component of the text object this script
+    /// on every update, increment hue ever so slightly and change the text color component of the text object this script
     /// is attatched to.
     /// </summary>
     void Update()

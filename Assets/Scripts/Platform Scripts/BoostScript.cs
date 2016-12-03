@@ -7,7 +7,6 @@ public class BoostScript : PlatformScript {
 
     public override void OnPlayerCollide(GameObject player, Vector2 hitNormal, Vector2 hitVelocity)
     {
-
         if (!shouldApplyEffect(hitNormal))
         {
             return;
@@ -22,8 +21,10 @@ public class BoostScript : PlatformScript {
         {
             velAdd += new Vector2(0, player.GetComponent<PlayerController>().JumpImpulse);
         }
-        player.GetComponent<Rigidbody2D>().velocity += velAdd;
-        //Debug.Log(player.GetComponent<Rigidbody2D>().velocity);
+        Vector2 v = player.GetComponent<Rigidbody2D>().velocity;
+        Vector2 phn = new Vector2(hitNormal.y, -hitNormal.x);
+        v = (Vector2.Dot(v, phn) * phn);
+        player.GetComponent<Rigidbody2D>().velocity = (v + velAdd);
     }
 	
 	// Update is called once per frame

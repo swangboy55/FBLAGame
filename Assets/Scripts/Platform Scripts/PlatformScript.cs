@@ -15,7 +15,6 @@ public abstract class PlatformScript : MonoBehaviour
         disabledSprite = Resources.Load<Sprite>("Sprites/spriteplatformdisabled");
         Vector3 rotation = GetComponent<Transform>().rotation.eulerAngles;
         normalCompare = (new Vector2(Mathf.Cos(Mathf.Deg2Rad * (rotation.z + 90.0f)), Mathf.Sin(Mathf.Deg2Rad * (rotation.z + 90.0f)))).normalized;
-        Debug.Log(normalCompare);
     }
 
     /// <summary>

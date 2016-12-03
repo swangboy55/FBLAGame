@@ -1,4 +1,6 @@
-meme : one hunnit
+bignum.io : 354354464
+shion>geno : 345
+meme : 100
 geno : 5
 geno : 5
 geno : 5
@@ -16,5 +18,3 @@ dingdong : 4
 17Slarkin : 3
 17Slarkin : 3
 17Slarkin : 3
-dingdong2 : 2
-dingdong2 : 2

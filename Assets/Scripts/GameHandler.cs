@@ -13,6 +13,8 @@ public class GameHandler : MonoBehaviour
     public GameObject playerVel;
     public GameObject secondsTillDead;
     public GameObject failPrompt;
+    public GameObject comboObject;
+    public GameObject scoreObject;
     public string nextScene;
 
     public float SpeedInterval;
@@ -74,6 +76,7 @@ public class GameHandler : MonoBehaviour
                 }
                 else
                 {
+                    ScorePersistence.LevelScores.Add(score);
                     SceneManager.LoadScene(nextScene);
                 }
             }
@@ -85,15 +88,15 @@ public class GameHandler : MonoBehaviour
 
             if (timeUnderReq >= timeAllowedUnderReq)
             {
+                lives--;
                 if (lives > 0)
                 {
                     SceneManager.LoadScene(currentScene);
-                    lives--;
                 }
                 else
                 {
-                    SceneManager.LoadScene("fail");
                     lives = 3;
+                    SceneManager.LoadScene("fail");
                 }
 
             }
@@ -133,13 +136,11 @@ public class GameHandler : MonoBehaviour
         secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)(timeUnderReq * 100.0f)) / 100.0f).ToString() + " / " + timeAllowedUnderReq;
 
         failPrompt.GetComponent<UnityEngine.UI.Text>().text = "Lives : " + lives;
-
-
-
-
-
-
+        comboObject.GetComponent<UnityEngine.UI.Text>().text = combo + "x";
     }
+
+
+    private float baseScale = 1;
 
     public void UpdateCombo(bool reset)
     {
@@ -151,11 +152,47 @@ public class GameHandler : MonoBehaviour
         {
             combo = 0;
         }
+        baseScale = Mathf.Min(combo / 100.0f, 1) + 1;
     }
 
-
-    public void UpdateScore(float velocityOver)
+    public void UpdateTimer(float bonusTime)
     {
-        //score += som e s h it *combo;
+        timeUnderReq -= bonusTime;
+        if(timeUnderReq < 0)
+        {
+            timeUnderReq = 0;
+        }
+    }
+
+    public void UpdateComboPretty(float TWI, float IT)
+    {
+        IT /= 8;
+        if(IT - TWI <= 0)
+        {
+            comboObject.transform.localScale = new Vector3(baseScale, baseScale, 1);
+            comboObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            float scaleUp = baseScale + ((IT - TWI) / (IT * 2));
+            comboObject.transform.localScale = new Vector3(scaleUp, scaleUp, 1);
+            comboObject.transform.rotation = Quaternion.Euler(0, 0, (scaleUp - baseScale) * 45);
+        }
+    }
+
+    public void UpdateScore(float velocity)
+    {
+        //combo is 0 based (0 combo should add 1x the score)
+        score += (velocity - velocityNeeded) * (combo + 1);
+    }
+
+    //amt range : (1, 2]
+    public void MulScore(float amt)
+    {
+        if(amt <= 1 || amt > 2)
+        {
+            return;
+        }
+        score *= amt;
     }
 }
