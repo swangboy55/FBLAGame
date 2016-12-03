@@ -23,6 +23,7 @@ public class VictoryInput : MonoBehaviour
         }
         ScorePersistence.LevelScores.Clear();
         finalScore = (int)Mathf.Round(finalScoref);
+        finalScore = 105351;
     }
 
     //number of entries in the scoreboard. I'd rather keep it at 20. 
