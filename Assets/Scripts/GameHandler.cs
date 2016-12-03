@@ -55,6 +55,10 @@ public class GameHandler : MonoBehaviour
         //Debug.Log(GetComponent<Rigidbody2D>().velocity.magnitude + " , " + velocityNeeded + " , " + timeUnderReq);
         if (Time.time < timeStart + PreparationSeconds)
         {
+
+            secondsTillDead.GetComponent<UnityEngine.UI.Text>().color = Color.HSVToRGB(118.0f / 255.0f, 1, 1);
+            secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)((Time.time - timeStart) * 100.0f)) / 100.0f).ToString() + " / " + PreparationSeconds;
+
             if (Time.time < timeStart + PreparationSeconds / 3)
             {
                 failPrompt.GetComponent<UnityEngine.UI.Text>().enabled = true;
@@ -66,6 +70,7 @@ public class GameHandler : MonoBehaviour
         }
         else
         {
+            secondsTillDead.GetComponent<UnityEngine.UI.Text>().color = Color.HSVToRGB(0, 1, 1);
             deltaTimeSum += Time.deltaTime;
             if (deltaTimeSum >= SpeedIntervalRate)
             {
@@ -132,11 +137,16 @@ public class GameHandler : MonoBehaviour
             localScale.Set(localScale.x, (((velocityNeeded - MinSpeed) / (MaxSpeed - MinSpeed)) * 6f) + 1f, localScale.z);
             speedReq.GetComponent<UnityEngine.UI.Image>().transform.localScale = localScale;
         }
+        if (Time.time >= timeStart + PreparationSeconds)
+        {
 
-        secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)(timeUnderReq * 100.0f)) / 100.0f).ToString() + " / " + timeAllowedUnderReq;
+            secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)(timeUnderReq * 100.0f)) / 100.0f).ToString() + " / " + timeAllowedUnderReq;
+        }
+            
 
         failPrompt.GetComponent<UnityEngine.UI.Text>().text = "Lives : " + lives;
         comboObject.GetComponent<UnityEngine.UI.Text>().text = combo + "x";
+        scoreObject.GetComponent<UnityEngine.UI.Text>().text = ((long)score).ToString();
     }
 
 
@@ -184,6 +194,7 @@ public class GameHandler : MonoBehaviour
     {
         //combo is 0 based (0 combo should add 1x the score)
         score += (velocity - velocityNeeded) * (combo + 1);
+        score = Mathf.Round(score);
     }
 
     //amt range : (1, 2]

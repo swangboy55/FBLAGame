@@ -5,7 +5,7 @@ using UnityEngine.UI;
 //Script to handle input on the main menu.
 public class MenuInputHandler : MonoBehaviour
 {
-    public Button ButtonOne, ButtonTwo, ButtonThree;
+    public Button ButtonOne, ButtonTwo, ButtonThree, ButtonFour;
     public Canvas canvas;
     public GameObject selectorPrefab;
     private GameObject selector;
@@ -21,7 +21,8 @@ public class MenuInputHandler : MonoBehaviour
         ButtonOne.enabled = false;
         ButtonTwo.enabled = false;
         ButtonThree.enabled = false;
-        buttons = new Button[] { ButtonOne, ButtonTwo, ButtonThree };
+        ButtonFour.enabled = false;
+        buttons = new Button[] { ButtonOne, ButtonTwo, ButtonThree, ButtonFour };
         selector = Instantiate(selectorPrefab) as GameObject;
         selector.transform.SetParent(canvas.transform);
         selector.transform.localScale = new Vector3(1, 1, 1);
@@ -35,7 +36,7 @@ public class MenuInputHandler : MonoBehaviour
     /// </summary>
     void OnGUI()
     {
-        if(ButtonOne == null || ButtonTwo == null || ButtonThree == null)
+        if(ButtonOne == null || ButtonTwo == null || ButtonThree == null || ButtonFour == null)
         {
             return;
         }
@@ -45,7 +46,7 @@ public class MenuInputHandler : MonoBehaviour
             if (!keyState)
             {
                 buttonIndex++;
-                if (buttonIndex >= 3)
+                if (buttonIndex >= 4)
                 {
                     buttonIndex = 0;
                 }
@@ -61,7 +62,7 @@ public class MenuInputHandler : MonoBehaviour
                 buttonIndex--;
                 if (buttonIndex < 0)
                 {
-                    buttonIndex = 2;
+                    buttonIndex = 3;
                 }
                 selector.transform.localPosition = new Vector3(buttons[buttonIndex].transform.localPosition.x - 400, buttons[buttonIndex].transform.localPosition.y,
                     0);

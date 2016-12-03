@@ -150,6 +150,7 @@ public class PlayerController : MonoBehaviour {
             {
                 rigid.gravityScale = gravSave;
                 GetComponent<GameHandler>().UpdateCombo(false);
+                GetComponent<GameHandler>().UpdateScore(hitVelocity.magnitude);
                 jumpTime = Time.time;
                 if (collisionTime + VelocityInvertTime < Time.time)
                 {

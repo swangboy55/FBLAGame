@@ -12,4 +12,9 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+
+    public void quit()
+    {
+        Application.Quit();
+    }
 }
