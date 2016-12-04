@@ -10,7 +10,7 @@ public class VictoryInput : MonoBehaviour
     public Text ScoreField;
     private int finalScore;
     private float scoreAnimStart;
-    private bool firstUpdate = false;
+    private bool firstUpdate = true;
     private bool animDone = false;
 
     // Use this for initialization
@@ -114,7 +114,7 @@ public class VictoryInput : MonoBehaviour
 
         string realNumbers = finalScore.ToString();
 
-        int digitsPassed = (int)Mathf.Min(Mathf.Max(((Time.time - scoreAnimStart - 0.5f) / 0.25f), 0), realNumbers.Length);
+        int digitsPassed = (int)Mathf.Min(Mathf.Max(((Time.time - scoreAnimStart - 0.5f) / 0.50f), 0), realNumbers.Length);
 
         StringBuilder finalString = new StringBuilder();
 

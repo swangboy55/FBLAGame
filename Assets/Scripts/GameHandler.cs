@@ -62,7 +62,7 @@ public class GameHandler : MonoBehaviour
         {
 
             secondsTillDead.GetComponent<UnityEngine.UI.Text>().color = Color.HSVToRGB(118.0f / 255.0f, 1, 1);
-            secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)((Time.time - timeStart) * 100.0f)) / 100.0f).ToString() + " / " + PreparationSeconds;
+            secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = "Prepare in:" + "\n" + ((float)((int)((PreparationSeconds + timeStart - Time.time) * 100.0f)) / 100.0f).ToString();
 
             if (Time.time < timeStart + PreparationSeconds / 3)
             {
@@ -145,13 +145,13 @@ public class GameHandler : MonoBehaviour
         if (Time.time >= timeStart + PreparationSeconds)
         {
 
-            secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)(timeUnderReq * 100.0f)) / 100.0f).ToString() + " / " + timeAllowedUnderReq;
+            secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = "Time under:" + "\n" + ((float)((int)(timeUnderReq * 100.0f)) / 100.0f).ToString() + " / " + timeAllowedUnderReq;
         }
 
 
         failPrompt.GetComponent<UnityEngine.UI.Text>().text = "Lives : " + lives + "\n" + "level: " + level;
         comboObject.GetComponent<UnityEngine.UI.Text>().text = combo + "x";
-        scoreObject.GetComponent<UnityEngine.UI.Text>().text = ((long)score).ToString();
+        scoreObject.GetComponent<UnityEngine.UI.Text>().text = "Score:" + "\n" +((long)score).ToString();
     }
 
 
