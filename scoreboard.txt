@@ -1,5 +1,7 @@
 bignum.io : 354354464
+numerdos   : 210799
 smollnum   : 159532
+jcollins   : 158466
 holyshit : 155383
 geno1  : 138450
 alex  : 116995
@@ -14,7 +16,5 @@ geno : 5
 geno : 5
 geno : 5
 geno : 5
-dingdong : 4
-dingdong : 4
 dingdong : 4
 dingdong : 4

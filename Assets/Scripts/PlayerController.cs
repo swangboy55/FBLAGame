@@ -125,6 +125,12 @@ public class PlayerController : MonoBehaviour {
             jumpDown = false;
         }
 
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+            GameHandler.lives = 3;
+        }
+
         hAxis = Input.GetAxis("Horizontal");
 
         vAxis = (Input.GetKey(KeyCode.S) ? -1 : (Input.GetKey(KeyCode.Space) ? 1 : 0));

@@ -17,6 +17,8 @@ public class GameHandler : MonoBehaviour
     public GameObject scoreObject;
     public string nextScene;
 
+    public static int lives = 3;
+
     public float SpeedInterval;
     public float SpeedIntervalRate = 1.0f;
 
@@ -29,7 +31,7 @@ public class GameHandler : MonoBehaviour
     private float deltaTimeSum = 0;
     private int combo;
 
-    private static int lives = 3;
+   
     private string level;
     private float velCurHue;
     private float reqCurHue;
