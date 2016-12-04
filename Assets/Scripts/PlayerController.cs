@@ -8,6 +8,7 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerController : MonoBehaviour {
 
+    public GameObject impactSound;
     public float Acceleration;
     public float MaxSpeed;
     public float JumpImpulse;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            impactSound.GetComponent<AudioSource>().Play();
             RaycastHit2D[][] hits2D = new RaycastHit2D[colliders.Length][];
             int inc = 0;
             int size = 0;

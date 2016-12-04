@@ -13,6 +13,7 @@ public class GameHandler : MonoBehaviour
     public float MaxSpeed;
     public float PreparationSeconds = 10.0f;
     public float timeAllowedUnderReq = 5f;
+    public GameObject Music;
     public GameObject speedReq;
     public GameObject playerVel;
     public GameObject secondsTillDead;
@@ -26,6 +27,7 @@ public class GameHandler : MonoBehaviour
     public float SpeedInterval;
     public float SpeedIntervalRate = 1.0f;
 
+    private bool musicPlaying;
     private string currentScene;
     private float velocityUpperBound;
     private float score;
@@ -57,6 +59,7 @@ public class GameHandler : MonoBehaviour
         reqCurHue = 0.8f;
         currentScene = SceneManager.GetActiveScene().name;
         level = currentScene.Substring(5);
+        musicPlaying = false;
         
     }
 
@@ -87,6 +90,12 @@ public class GameHandler : MonoBehaviour
         //the game has now officially started, and the velocity needed will start to increase.
         else
         {
+            //play music when the game begins
+            if (!Music.GetComponent<AudioSource>().isPlaying)
+            {
+                Music.GetComponent<AudioSource>().Play();
+            }
+            
             //make the seconds under req element red and start adding to deltatimesum. Deltatime sum serves as a conversion from updates->seconds. VelocityNeeded is updated every 1 * speedInterval seconds
             //if velocityNeeded is greater than maxspeed, the player has won, so the next Scene is loaded.
             secondsTillDead.GetComponent<UnityEngine.UI.Text>().color = Color.HSVToRGB(0, 1, 1);
@@ -102,6 +111,10 @@ public class GameHandler : MonoBehaviour
                 {
                     ScorePersistence.LevelScores.Add(score);
                     SceneManager.LoadScene(nextScene);
+                    if(nextScene.Equals("Victory"))
+                    {
+                        lives = 3;
+                    }
                 }
             }
 
