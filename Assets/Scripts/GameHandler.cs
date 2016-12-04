@@ -30,6 +30,7 @@ public class GameHandler : MonoBehaviour
     private int combo;
 
     private static int lives = 3;
+    private string level;
     private float velCurHue;
     private float reqCurHue;
 
@@ -47,12 +48,14 @@ public class GameHandler : MonoBehaviour
         velCurHue = 0.8f;
         reqCurHue = 0.8f;
         currentScene = SceneManager.GetActiveScene().name;
+        level = currentScene.Substring(5);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity.magnitude + " , " + velocityNeeded + " , " + timeUnderReq);
+
         if (Time.time < timeStart + PreparationSeconds)
         {
 
@@ -142,9 +145,9 @@ public class GameHandler : MonoBehaviour
 
             secondsTillDead.GetComponent<UnityEngine.UI.Text>().text = ((float)((int)(timeUnderReq * 100.0f)) / 100.0f).ToString() + " / " + timeAllowedUnderReq;
         }
-            
 
-        failPrompt.GetComponent<UnityEngine.UI.Text>().text = "Lives : " + lives;
+
+        failPrompt.GetComponent<UnityEngine.UI.Text>().text = "Lives : " + lives + "\n" + "level: " + level;
         comboObject.GetComponent<UnityEngine.UI.Text>().text = combo + "x";
         scoreObject.GetComponent<UnityEngine.UI.Text>().text = ((long)score).ToString();
     }
