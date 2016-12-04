@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-// Script to handle user input on the failure screen. Very similar to the MenuInputHandler, but has slight
-// differences in terms of how it works and how many buttons it supports.
+// Script to handle input on leaderboard.
 public class LeaderBoardInputHandler : MonoBehaviour
 {
     public Button ButtonOne;
@@ -13,7 +12,7 @@ public class LeaderBoardInputHandler : MonoBehaviour
     private GameObject selector;
     private bool keyState = false;
     /// <summary>
-    /// Make an array with all menu buttons passed in, and then move the selector to the first button
+    /// Move selector to the button passed in
     /// </summary>
     void Start()
     {

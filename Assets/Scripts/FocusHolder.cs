@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// short class to keep focus on a textbox; used on victory scene.
+/// </summary>
 public class FocusHolder : MonoBehaviour {
 
     public GameObject TextBox;

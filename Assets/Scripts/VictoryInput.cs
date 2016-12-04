@@ -85,7 +85,7 @@ public class VictoryInput : MonoBehaviour
 
     }
 
-    // ANIMatION loL
+    // Animate the score shown on the victory screen with an aesthetic animation :^)
     void Update () {
 
         if(Input.GetKey(KeyCode.Return))

@@ -18,7 +18,8 @@ public class TrackBall : MonoBehaviour {
 
     /// <summary>
     ///  Update is called once per frame
-    ///  track the character object(referenceObject) with the camera, and smoothdamp movement so it flows nicely.
+    ///  track the character object(referenceObject) with the camera, and smoothdamp movement so it flows nicely, and 
+    ///  allows the player to gather information about areas they were previously in if they are moving fast.
     /// </summary>
 
     void FixedUpdate()

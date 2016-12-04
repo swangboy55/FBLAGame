@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//Script to handle special conditions for boost platform
 public class BoostScript : PlatformScript {
 
     public float BoostFactor = 3;
 
+    /// <summary>
+    /// On player collide, reflect player velocity across the normal and multiply it.
+    /// </summary>
+    /// <param name="player">The player gameobject</param>
+    /// <param name="hitNormal">The normal of the collision</param>
+    /// <param name="hitVelocity">The velocity the player hit the surface at</param>
     public override void OnPlayerCollide(GameObject player, Vector2 hitNormal, Vector2 hitVelocity)
     {
         if (!shouldApplyEffect(hitNormal))

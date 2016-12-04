@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-// Script to handle user input on the failure screen. Very similar to the MenuInputHandler, but has slight
-// differences in terms of how it works and how many buttons it supports.
+// Script to handle user input on the controls/tutorial screen
 public class TutorialInputHandler : MonoBehaviour
 {
 
@@ -17,7 +16,7 @@ public class TutorialInputHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Load menu scene when player hits enter
+    /// on pressing enter: if player is on controls1, move to controls2. Otherwise, go to menu
     /// </summary>
     void OnGUI()
     {

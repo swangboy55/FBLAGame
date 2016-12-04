@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// very short scene-loading script which is typically attatched to onClick events
+/// very short scene-loading script which is typically attached to onClick events
 /// </summary>
 public class LoadScene : MonoBehaviour
 {
