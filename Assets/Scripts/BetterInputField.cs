@@ -16,6 +16,8 @@ public class BetterInputField : InputField
     //unity UI is bad
     protected override void LateUpdate()
     {
+        //utilize reflection to set the input field values manually
+        //and override the select all on focus
         var cspi = typeof(InputField).GetProperty("caretSelectPositionInternal", BindingFlags.Instance | BindingFlags.NonPublic);
         var cpi = typeof(InputField).GetProperty("caretPositionInternal", BindingFlags.Instance | BindingFlags.NonPublic);
         var shouldActivateNextUpdate = typeof(InputField).GetField("m_ShouldActivateNextUpdate", BindingFlags.Instance | BindingFlags.NonPublic);
