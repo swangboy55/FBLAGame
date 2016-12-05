@@ -27,7 +27,6 @@ public class GameHandler : MonoBehaviour
     public float SpeedInterval;
     public float SpeedIntervalRate = 1.0f;
 
-    private bool musicPlaying;
     private string currentScene;
     private float velocityUpperBound;
     private float score;
@@ -59,7 +58,7 @@ public class GameHandler : MonoBehaviour
         reqCurHue = 0.8f;
         currentScene = SceneManager.GetActiveScene().name;
         level = currentScene.Substring(5);
-        musicPlaying = false;
+
         
     }
 
